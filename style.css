@@ -1,0 +1,32 @@
+.column {
+    width: 400px;
+    margin: 0px auto;
+    justify-content: center;
+    display: flex;
+    /* flex-direction: column;
+    flex-wrap: wrap; */
+}
+#grid {
+    transform: rotate(-90deg);
+}
+.title{
+    float: center;
+}
+button{
+    margin: 15px;
+    transform: rotate(90deg);
+}
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.row {
+    width: 100px;
+    height: 100px;
+    margin: 0px;
+    border: 2px black solid;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    font-size: small;
+}
