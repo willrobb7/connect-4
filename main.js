@@ -50,6 +50,7 @@ function setCounter (turnNum) {
 
 }
 
+
 function placeCounter(board, htmlBoard, input) {
     turnNum++
     currentPlayer = setPlayer(turnNum)
@@ -68,12 +69,13 @@ function placeCounter(board, htmlBoard, input) {
     console.log(rowPosition);
     chosenCollumnJS[rowPosition] = currentCounter
     chosenCollumnHtml[rowPosition].style.background = currentCounter
-    console.log(board);
+    // console.log(board);
     
     if (isCollumnFull(chosenCollumnJS, input)) {
 
         return
     }
+    checkVerticalWin(chosenCollumnJS)
 }
 
 function isCollumnFull (chosenCollumn, input) {
@@ -99,6 +101,23 @@ function isCollumnFull (chosenCollumn, input) {
 
         return true
     }
+}
+
+function checkVerticalWin(chosenCollumnJS) {
+    let column = []
+
+    for (let i = 0; i < chosenCollumnJS.length; i++) {
+        column.push(chosenCollumnJS[i])
+    };
+
+    for (let i = 0; i < column.length; i++) {
+        if (column[i] !== null && column[i] === column[i+1] && column[i+1] === column[i+2] && column[i+2] === column[i+3]){
+            console.log("TADA BITCHES");
+        }  
+    }
+    
+    console.log(column);
+        
 }
 
 initGame()
