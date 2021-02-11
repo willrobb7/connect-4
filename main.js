@@ -12,8 +12,6 @@ const columnFiveButton = document.getElementById("column-4-button")
 const columnSixButton = document.getElementById("column-5-button")
 const columnSevenButton = document.getElementById("column-6-button")
 
-const isNull = (element) => element == null
-
 function initGame () {
     board = [[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null]]
     htmlBoard[0] = [document.getElementById("column-0-row-0"),document.getElementById("column-0-row-1"),document.getElementById("column-0-row-2"),document.getElementById("column-0-row-3"),document.getElementById("column-0-row-4"),document.getElementById("column-0-row-5")]
@@ -24,28 +22,6 @@ function initGame () {
     htmlBoard[5] = [document.getElementById("column-5-row-0"),document.getElementById("column-5-row-1"),document.getElementById("column-5-row-2"),document.getElementById("column-5-row-3"),document.getElementById("column-5-row-4"),document.getElementById("column-5-row-5")]
     htmlBoard[6] = [document.getElementById("column-6-row-0"),document.getElementById("column-6-row-1"),document.getElementById("column-6-row-2"),document.getElementById("column-6-row-3"),document.getElementById("column-6-row-4"),document.getElementById("column-6-row-5")]
     return board
-}
-
-function setPlayer (turnNum) {
-    let newPlayer 
-    if (turnNum % 2){
-        newPlayer = 1
-    } else if ((turnNum+1) % 2) {
-        newPlayer = 2
-    }
-    return newPlayer
-
-}
-
-function setCounter (turnNum) {
-    let newCounter 
-    if (turnNum % 2){
-        newCounter = "Red"
-    } else if ((turnNum+1) % 2) {
-        newCounter = "Yellow"
-    }
-    return newCounter
-
 }
 
 function placeCounter(board, htmlBoard, input) {
@@ -99,12 +75,7 @@ function isCollumnFull (chosenCollumn, input) {
 }
 
 function checkVerticalWin(chosenCollumnJS) {
-    let column = []
-    console.log(column);    
-
-    for (let i = 0; i < chosenCollumnJS.length; i++) {
-        column.push(chosenCollumnJS[i])
-    };
+    let column = createColumn(chosenCollumnJS)
 
     for (let i = 0; i < column.length; i++) {
         if (column[i] !== null && column[i] === column[i+1] && column[i+1] === column[i+2] && column[i+2] === column[i+3]){
