@@ -25,32 +25,29 @@ function initGame () {
 }
 
 function placeCounter(board, htmlBoard, input) {
+
     turnNum++
+
     currentPlayer = setPlayer(turnNum)
     currentCounter = setCounter(turnNum)
     
     let chosenCollumnJS = board[input]
     let chosenCollumnHtml = htmlBoard[input]
-    
     let rowPosition = chosenCollumnJS.findIndex(isNull)
-    
-    
     
     console.log(rowPosition);
     chosenCollumnJS[rowPosition] = currentCounter
     chosenCollumnHtml[rowPosition].style.background = currentCounter
-    // console.log(board);
     
     checkVerticalWin(chosenCollumnJS)
     if (isCollumnFull(chosenCollumnJS, input)) {
 
         return
     }
-    // resetHtmlBoard()
+    checkHorizontalWin(board)
 }
 
 function isCollumnFull (chosenCollumn, input) {
-    // blur button so not clickable
 
     if(chosenCollumn[5] !== null){
 
@@ -107,6 +104,17 @@ function resetPage () {
 }
 
 
+
+function checkHorizontalWin (board) {
+
+    
+
+}
+
+
+
+
+
 initGame()
 
-
+checkHorizontalWin(board)
