@@ -1,0 +1,22 @@
+{
+  "name": "mini-project-connect-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willrobb7/connect-4.git"
+  },
+  "author": "Will Robinson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willrobb7/connect-4/issues"
+  },
+  "homepage": "https://github.com/willrobb7/connect-4#readme",
+  "dependencies": {
+    "jest": "^26.6.3"
+  }
+}

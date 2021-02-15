@@ -32,4 +32,13 @@ function createColumn (chosenCollumnJS) {
     return column
 }
 
-module.exports= {setPlayer, setCounter, isNull, createColumn}
+function createRow (board, rowPosition) {
+    let row = []
+
+    for (i=0; i < board.length; i++){
+        row.push(board[i][rowPosition])
+    }
+    return row
+}
+
+module.exports= {setPlayer, setCounter, isNull, createColumn, createRow}

@@ -40,11 +40,11 @@ function placeCounter(board, htmlBoard, input) {
     chosenCollumnHtml[rowPosition].style.background = currentCounter
     
     checkVerticalWin(chosenCollumnJS)
+    checkHorizontalWin(board, rowPosition)
     if (isCollumnFull(chosenCollumnJS, input)) {
 
         return
     }
-    checkHorizontalWin(board)
 }
 
 function isCollumnFull (chosenCollumn, input) {
@@ -82,6 +82,18 @@ function checkVerticalWin(chosenCollumnJS) {
 
 }
 
+function checkHorizontalWin (board, rowPosition) {
+
+    let row = createRow(board, rowPosition)
+
+    for ( i = 0; i < row.length; i++) {
+        if (row[i] !== null && row[i] === row[i+1] && row[i+1] === row[i+2] && row[i+2] === row[i+3]){
+            win()
+        }  
+    }
+
+}
+
 function disableButtons () {
     columnOneButton.disabled = true
     columnTwoButton.disabled = true
@@ -104,17 +116,4 @@ function resetPage () {
 }
 
 
-
-function checkHorizontalWin (board) {
-
-    
-
-}
-
-
-
-
-
 initGame()
-
-checkHorizontalWin(board)
