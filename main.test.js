@@ -48,7 +48,7 @@ test('setCounter will return a string of yellow if the number of turns is even /
     expect(evenTurnNumberSetPlayerToOne).toStrictEqual(expectedOutput)
 })
 
-test('isNull will return false if the value of the element is null', () => {
+test('isNull will return false if the value of the element is not null', () => {
     //arrange 
     let element = "Red"
     let expectedOutput = false
@@ -71,3 +71,15 @@ test('isNull will return true if the value of the element is null', () => {
     //assert
     expect(elementSetToRed).toStrictEqual(expectedOutput)
 })
+
+test('createRow will create an array of all of the inputs in a chosen row', () => {
+    let rowPosition = 2
+    let board = [[null,null,'red',null,null,null],[null,null,'yellow',null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null]]
+    let expectedOutput = ['red','yellow', null, null, null, null, null]
+    //act
+    let createdRow = pureFunctions.createRow(board, rowPosition)
+
+    expect(createdRow).toStrictEqual(expectedOutput)
+    
+})
+

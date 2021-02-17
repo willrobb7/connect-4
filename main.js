@@ -24,6 +24,8 @@ function initGame () {
     return board
 }
 
+
+
 function placeCounter(board, htmlBoard, input) {
 
     turnNum++
@@ -35,16 +37,45 @@ function placeCounter(board, htmlBoard, input) {
     let chosenCollumnHtml = htmlBoard[input]
     let rowPosition = chosenCollumnJS.findIndex(isNull)
     
-    console.log(rowPosition);
     chosenCollumnJS[rowPosition] = currentCounter
     chosenCollumnHtml[rowPosition].style.background = currentCounter
     
-    checkVerticalWin(chosenCollumnJS)
-    checkHorizontalWin(board, rowPosition)
+    checkAllPossibleWins(chosenCollumnJS, board, rowPosition)
     if (isCollumnFull(chosenCollumnJS, input)) {
 
         return
     }
+}
+
+function checkAllPossibleWins (chosenCollumnJS, board, rowPosition) {
+    if (checkHorizontalWin(board, rowPosition)) {
+        return
+    }
+    if (checkVerticalWin(chosenCollumnJS)) {
+        return
+    }
+    if (getDiagonalArrays(board)) {
+        return
+    }
+}
+
+
+function getDiagonalArrays (board) {
+// console.log(board[0][3])
+    let diagonalOne = [(board[0][3]),(board[1][2]), (board[2][1]), (board[3][0]) ]
+    let diagonalTwo = [(board[0][4]),(board[1][3]), (board[2][2]), (board[3][1]), (board[4][0]) ]
+    let diagonalThree = [(board[0][5]),(board[1][4]), (board[2][3]), (board[3][2]), (board[4][1]) ,  (board[5][0]) ]
+    let diagonalFour = [(board[1][5]),(board[2][4]), (board[3][3]), (board[4][2]), (board[5][1]) ,  (board[6][0]) ]
+    let diagonalFive = [(board[2][5]),(board[3][4]), (board[4][3]), (board[5][2]), (board[6][1]) ]
+    let diagonalSix = [(board[3][5]),(board[4][4]), (board[5][3]), (board[6][2])]
+    let diagonalSeven = [(board[0][2]),(board[1][3]), (board[2][4]), (board[3][5])]
+    let diagonalEight = [(board[0][1]),(board[1][2]), (board[2][3]), (board[3][4]), (board[4][5]) ]
+    let diagonalNine = [(board[0][0]),(board[1][1]), (board[2][2]), (board[3][3]), (board[4][4]), (board[5][5]) ]
+    let diagonalTen = [(board[1][0]),(board[2][1]), (board[3][2]), (board[4][3]), (board[5][4]), (board[6][5]) ]
+    let diagonalEleven = [(board[2][0]),(board[3][1]), (board[4][2]), (board[5][3]), (board[6][4])]
+    let diagonalTwelve = [(board[3][0]),(board[4][1]), (board[5][2]), (board[6][3])]
+    let libraryOfDiagonals = [diagonalOne,diagonalTwo,diagonalThree, diagonalFour, diagonalFive, diagonalSix, diagonalSeven,diagonalEight,diagonalNine,diagonalTen,diagonalEleven, diagonalTwelve]
+    checkDiagonalWin(libraryOfDiagonals)
 }
 
 function isCollumnFull (chosenCollumn, input) {
@@ -71,12 +102,26 @@ function isCollumnFull (chosenCollumn, input) {
     }
 }
 
-function checkVerticalWin(chosenCollumnJS) {
-    let column = createColumn(chosenCollumnJS)
+function checkDiagonalWin (libraryOfDiagonals) {
+    for (let i = 0; i < libraryOfDiagonals.length; i++) {
+        const currentDiagonal = libraryOfDiagonals[i];
+        for (let j = 0; j < currentDiagonal.length; j++) {
+            if (currentDiagonal[j] !== null && currentDiagonal[j] === currentDiagonal[j+1] && currentDiagonal[j+1] === currentDiagonal[j+2] && currentDiagonal[j+2] === currentDiagonal[j+3]){
+                win()
+                return true
+            }  
 
-    for (let i = 0; i < column.length; i++) {
-        if (column[i] !== null && column[i] === column[i+1] && column[i+1] === column[i+2] && column[i+2] === column[i+3]){
+        }
+    
+    }
+}
+
+function checkVerticalWin(chosenCollumnJS) {
+
+    for (let i = 0; i < chosenCollumnJS.length; i++) {
+        if (chosenCollumnJS[i] !== null && chosenCollumnJS[i] === chosenCollumnJS[i+1] && chosenCollumnJS[i+1] === chosenCollumnJS[i+2] && chosenCollumnJS[i+2] === chosenCollumnJS[i+3]){
             win()
+            return true
         }  
     }
 
@@ -89,6 +134,7 @@ function checkHorizontalWin (board, rowPosition) {
     for ( i = 0; i < row.length; i++) {
         if (row[i] !== null && row[i] === row[i+1] && row[i+1] === row[i+2] && row[i+2] === row[i+3]){
             win()
+            return true
         }  
     }
 
@@ -106,7 +152,7 @@ function disableButtons () {
 
 function win () {
     disableButtons()
-    setTimeout(resetPage,5000)
+    setTimeout(resetPage,3000)
     alert(`The Winner is ${currentCounter}`)
 }
 

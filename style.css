@@ -21,12 +21,7 @@ button{
     opacity: 0.6;
     cursor: not-allowed;
 }
-/* .column{
-    background-color: blue;
-} */
-.columnButtons {
-    /* background-color: grey; */
-}
+
 .row {
     width: 100px;
     height: 100px;

@@ -22,16 +22,6 @@ function setCounter (turnNum) {
 
 const isNull = (element) => element == null
 
-
-function createColumn (chosenCollumnJS) {
-    let column = []
-
-    for (let i = 0; i < chosenCollumnJS.length; i++) {
-        column.push(chosenCollumnJS[i])
-    };
-    return column
-}
-
 function createRow (board, rowPosition) {
     let row = []
 
@@ -41,4 +31,4 @@ function createRow (board, rowPosition) {
     return row
 }
 
-module.exports= {setPlayer, setCounter, isNull, createColumn, createRow}
+module.exports= {setPlayer, setCounter, isNull, createRow}
