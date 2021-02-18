@@ -24,41 +24,68 @@ function initGame () {
     return board
 }
 
-
-
-function placeCounter(board, htmlBoard, input) {
+function placeCounter(board, htmlBoard, columnNum) {
 
     turnNum++
 
     currentPlayer = setPlayer(turnNum)
     currentCounter = setCounter(turnNum)
     
-    let chosenCollumnJS = board[input]
-    let chosenCollumnHtml = htmlBoard[input]
+    let chosenCollumnJS = board[columnNum]
+    let chosenCollumnHtml = htmlBoard[columnNum]
     let rowPosition = chosenCollumnJS.findIndex(isNull)
     
     chosenCollumnJS[rowPosition] = currentCounter
     chosenCollumnHtml[rowPosition].style.background = currentCounter
     
     checkAllPossibleWins(chosenCollumnJS, board, rowPosition)
-    if (isCollumnFull(chosenCollumnJS, input)) {
 
-        return
-    }
+    disableButtonIfColumnIsFull(chosenCollumnJS, columnNum)
 }
 
 function checkAllPossibleWins (chosenCollumnJS, board, rowPosition) {
     if (checkHorizontalWin(board, rowPosition)) {
-        return
-    }
-    if (checkVerticalWin(chosenCollumnJS)) {
-        return
-    }
-    if (getDiagonalArrays(board)) {
-        return
+        win()
+    } else if (checkVerticalWin(chosenCollumnJS)) {
+        win()
+    } else if (checkDiagonalWin(getDiagonalArrays(board))) {
+        win()
     }
 }
 
+function checkDiagonalWin (libraryOfDiagonals) {
+
+    for (let i = 0; i < libraryOfDiagonals.length; i++) {
+        const currentDiagonal = libraryOfDiagonals[i];
+        for (let j = 0; j < currentDiagonal.length; j++) {
+            if (currentDiagonal[j] !== null && currentDiagonal[j] === currentDiagonal[j+1] && currentDiagonal[j+1] === currentDiagonal[j+2] && currentDiagonal[j+2] === currentDiagonal[j+3]){
+                return true
+            }  
+        }
+    }
+}
+
+function checkVerticalWin(chosenCollumnJS) {
+
+    for (let i = 0; i < chosenCollumnJS.length; i++) {
+        if (chosenCollumnJS[i] !== null && chosenCollumnJS[i] === chosenCollumnJS[i+1] && chosenCollumnJS[i+1] === chosenCollumnJS[i+2] && chosenCollumnJS[i+2] === chosenCollumnJS[i+3]){
+            return true
+        }  
+    }
+
+}
+
+function checkHorizontalWin (board, rowPosition) {
+
+    let row = createRow(board, rowPosition)
+
+    for ( i = 0; i < row.length; i++) {
+        if (row[i] !== null && row[i] === row[i+1] && row[i+1] === row[i+2] && row[i+2] === row[i+3]){
+            return true
+        }  
+    }
+
+}
 
 function getDiagonalArrays (board) {
 // console.log(board[0][3])
@@ -75,69 +102,29 @@ function getDiagonalArrays (board) {
     let diagonalEleven = [(board[2][0]),(board[3][1]), (board[4][2]), (board[5][3]), (board[6][4])]
     let diagonalTwelve = [(board[3][0]),(board[4][1]), (board[5][2]), (board[6][3])]
     let libraryOfDiagonals = [diagonalOne,diagonalTwo,diagonalThree, diagonalFour, diagonalFive, diagonalSix, diagonalSeven,diagonalEight,diagonalNine,diagonalTen,diagonalEleven, diagonalTwelve]
-    checkDiagonalWin(libraryOfDiagonals)
+    return libraryOfDiagonals
 }
 
-function isCollumnFull (chosenCollumn, input) {
-
+function disableButtonIfColumnIsFull (chosenCollumn, columnNum) {
+// Side effect function
     if(chosenCollumn[5] !== null){
 
-        if (input === 0) {
+        if (columnNum === 0) {
             columnOneButton.disabled = true
-        } else if (input === 1) {
+        } else if (columnNum === 1) {
             columnTwoButton.disabled = true
-        } else if (input === 2) {
+        } else if (columnNum === 2) {
             columnThreeButton.disabled = true
-        } else if (input === 3) {
+        } else if (columnNum === 3) {
             columnFourButton.disabled = true
-        } else if (input === 4) {
+        } else if (columnNum === 4) {
             columnFiveButton.disabled = true
-        } else if (input === 5) {
+        } else if (columnNum === 5) {
             columnSixButton.disabled = true
-        } else if (input === 6) {
+        } else if (columnNum === 6) {
             columnSevenButton.disabled = true
         }
-
-        return true
     }
-}
-
-function checkDiagonalWin (libraryOfDiagonals) {
-    for (let i = 0; i < libraryOfDiagonals.length; i++) {
-        const currentDiagonal = libraryOfDiagonals[i];
-        for (let j = 0; j < currentDiagonal.length; j++) {
-            if (currentDiagonal[j] !== null && currentDiagonal[j] === currentDiagonal[j+1] && currentDiagonal[j+1] === currentDiagonal[j+2] && currentDiagonal[j+2] === currentDiagonal[j+3]){
-                win()
-                return true
-            }  
-
-        }
-    
-    }
-}
-
-function checkVerticalWin(chosenCollumnJS) {
-
-    for (let i = 0; i < chosenCollumnJS.length; i++) {
-        if (chosenCollumnJS[i] !== null && chosenCollumnJS[i] === chosenCollumnJS[i+1] && chosenCollumnJS[i+1] === chosenCollumnJS[i+2] && chosenCollumnJS[i+2] === chosenCollumnJS[i+3]){
-            win()
-            return true
-        }  
-    }
-
-}
-
-function checkHorizontalWin (board, rowPosition) {
-
-    let row = createRow(board, rowPosition)
-
-    for ( i = 0; i < row.length; i++) {
-        if (row[i] !== null && row[i] === row[i+1] && row[i+1] === row[i+2] && row[i+2] === row[i+3]){
-            win()
-            return true
-        }  
-    }
-
 }
 
 function disableButtons () {

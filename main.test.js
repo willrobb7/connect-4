@@ -48,6 +48,7 @@ test('setCounter will return a string of yellow if the number of turns is even /
     expect(evenTurnNumberSetPlayerToOne).toStrictEqual(expectedOutput)
 })
 
+
 test('isNull will return false if the value of the element is not null', () => {
     //arrange 
     let element = "Red"
