@@ -84,3 +84,57 @@ test('createRow will create an array of all of the inputs in a chosen row', () =
     
 })
 
+test('checkVerticalWin returns false when there are not four of the same counters in a row (vertically)',() => {
+    //arrange 
+    let chosenCollumnJS = ["Red","Yellow","Red","Yellow","Red","Yellow"]
+    //act
+    let returnedValue = pureFunctions.checkVerticalWin(chosenCollumnJS)
+    //assert 
+    expect(returnedValue).toStrictEqual(false)
+})
+
+test('checkVerticalWin returns true when there are four of the same counters in a row (vertically)',() => {
+    //arrange 
+    let chosenCollumnJS = ["Red","Red","Red","Red","Yellow","Yellow"]
+    //act
+    let returnedValue = pureFunctions.checkVerticalWin(chosenCollumnJS)
+    //assert 
+    expect(returnedValue).toStrictEqual(true)
+})
+
+test('checkVerticalWin returns false when there are four values of null in a row (vertically)',() => {
+    //arrange 
+    let chosenCollumnJS = [null,null,null,null,"Red","Yellow"]
+    //act
+    let returnedValue = pureFunctions.checkVerticalWin(chosenCollumnJS)
+    //assert 
+    expect(returnedValue).toStrictEqual(false)
+})
+
+test('checkHorizontalRow returns false when there are not four of the same counters in a row (horizontally)',() => {
+    //arrange 
+    let board = [[null,null,'red',null,null,null],[null,null,'red',null,null,null],[null,null,'yellow',null,null,null],[null,null,'yellow',null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null]]
+    //act
+    let returnedValue = pureFunctions.checkHorizontalWin(board,2)
+    //assert 
+    expect(returnedValue).toStrictEqual(false)
+})
+
+test('checkHorizontalRow returns true when there are four of the same counters in a row (horizontally)',() => {
+    //arrange 
+    let board = [[null,null,'red',null,null,null],[null,null,'red',null,null,null],[null,null,'red',null,null,null],[null,null,'red',null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null]]
+    //act
+    let returnedValue = pureFunctions.checkHorizontalWin(board,2)
+    //assert 
+    expect(returnedValue).toStrictEqual(true)
+})
+
+test('checkHorizontalRow returns false when there are four null counters in a row (horizontally)',() => {
+    //arrange 
+    let board = [[null,null,'red',null,null,null],[null,null,'red',null,null,null],[null,null,'red',null,null,null],[null,null,'red',null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null]]
+    //act
+    let returnedValue = pureFunctions.checkHorizontalWin(board,1)
+    //assert 
+    expect(returnedValue).toStrictEqual(false)
+})
+
