@@ -1,8 +1,8 @@
-let board
-let player = 0
-let turnNum = 0 
-let counter
-let currentPlayer 
+// let board
+// let player = 0
+// let turnNum = 0 
+// let counter
+// let currentPlayer 
 let htmlBoard = [[]]
 const columnOneButton = document.getElementById("column-0-button")
 const columnTwoButton = document.getElementById("column-1-button")
@@ -12,8 +12,7 @@ const columnFiveButton = document.getElementById("column-4-button")
 const columnSixButton = document.getElementById("column-5-button")
 const columnSevenButton = document.getElementById("column-6-button")
 
-function initGame () {
-    board = [[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null]]
+function initHtmlGameboard () {
     htmlBoard[0] = [document.getElementById("column-0-row-0"),document.getElementById("column-0-row-1"),document.getElementById("column-0-row-2"),document.getElementById("column-0-row-3"),document.getElementById("column-0-row-4"),document.getElementById("column-0-row-5")]
     htmlBoard[1] = [document.getElementById("column-1-row-0"),document.getElementById("column-1-row-1"),document.getElementById("column-1-row-2"),document.getElementById("column-1-row-3"),document.getElementById("column-1-row-4"),document.getElementById("column-1-row-5")]
     htmlBoard[2] = [document.getElementById("column-2-row-0"),document.getElementById("column-2-row-1"),document.getElementById("column-2-row-2"),document.getElementById("column-2-row-3"),document.getElementById("column-2-row-4"),document.getElementById("column-2-row-5")]
@@ -21,38 +20,24 @@ function initGame () {
     htmlBoard[4] = [document.getElementById("column-4-row-0"),document.getElementById("column-4-row-1"),document.getElementById("column-4-row-2"),document.getElementById("column-4-row-3"),document.getElementById("column-4-row-4"),document.getElementById("column-4-row-5")]
     htmlBoard[5] = [document.getElementById("column-5-row-0"),document.getElementById("column-5-row-1"),document.getElementById("column-5-row-2"),document.getElementById("column-5-row-3"),document.getElementById("column-5-row-4"),document.getElementById("column-5-row-5")]
     htmlBoard[6] = [document.getElementById("column-6-row-0"),document.getElementById("column-6-row-1"),document.getElementById("column-6-row-2"),document.getElementById("column-6-row-3"),document.getElementById("column-6-row-4"),document.getElementById("column-6-row-5")]
-    return board
 }
 
-function placeCounter(board, htmlBoard, columnNum) {
-
-    turnNum++
-
-    currentPlayer = setPlayer(turnNum)
-    currentCounter = setCounter(turnNum)
+function placeCounter( htmlBoard, columnNum) {
     
-    let chosenCollumnJS = board[columnNum]
     let chosenCollumnHtml = htmlBoard[columnNum]
-    let rowPosition = chosenCollumnJS.findIndex(isNull)
-    
-    chosenCollumnJS[rowPosition] = currentCounter
     chosenCollumnHtml[rowPosition].style.background = currentCounter
     
-    checkAllPossibleWins(chosenCollumnJS, board, rowPosition)
+    if( hasWon ) {
+        win()
+    }
 
     disableButtonIfColumnIsFull(chosenCollumnJS, columnNum)
 }
 
 function checkAllPossibleWins (chosenCollumnJS, board, rowPosition) {
-    if (checkHorizontalWin(board, rowPosition)) {
-        win()
-    } else if (checkVerticalWin(chosenCollumnJS)) {
-        win()
-    } else if (checkDiagonalWin(getDiagonalArrays(board))) {
-        win()
-    }
-}
 
+    return checkHorizontalWin(board, rowPosition) || checkVerticalWin(chosenCollumnJS) || checkDiagonalWin(getDiagonalArrays(board))
+}
 
 function disableButtonIfColumnIsFull (chosenCollumn, columnNum) {
 // Side effect function
@@ -97,5 +82,5 @@ function resetPage () {
     location.reload()
 }
 
-
-initGame()
+board = initJsGameboard()
+initHtmlGameboard()

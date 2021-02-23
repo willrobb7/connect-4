@@ -54,6 +54,21 @@ function checkVerticalWin(chosenCollumnJS) {
 
 }
 
+function checkAllPossibleWins (chosenCollumnJS, board, rowPosition) {
+    if (checkHorizontalWin(board, rowPosition)) {
+        return true
+    } else if (checkVerticalWin(chosenCollumnJS)) {
+        return true
+    } else if (checkDiagonalWin(getDiagonalArrays(board))) {
+        return true
+    }
+}
+
+function initJsGameboard () {
+
+    return [[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null]]
+}
+
 function checkHorizontalWin (board, rowPosition) {
 
     let row = createRow(board, rowPosition)
@@ -84,4 +99,4 @@ function getDiagonalArrays (board) {
     return libraryOfDiagonals
 }
 
-module.exports= {setPlayer, setCounter, isNull, createRow, checkDiagonalWin, checkVerticalWin, checkHorizontalWin, getDiagonalArrays}
+module.exports= {setPlayer, checkAllPossibleWins, initJsGameboard, setCounter, isNull, createRow, checkDiagonalWin, checkVerticalWin, checkHorizontalWin, getDiagonalArrays}
